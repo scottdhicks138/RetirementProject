@@ -29,6 +29,8 @@ public partial class _Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         UnobtrusiveValidationMode = System.Web.UI.UnobtrusiveValidationMode.None;
+        imgBenFranklin.Height = 186;
+        imgBenFranklin.Width = 432;
         
         if (!IsPostBack)
             for (int i = 50; i <= 500; i += 50)
@@ -41,10 +43,12 @@ public partial class _Default : System.Web.UI.Page
     {
         if (IsValid)
         {
+            imgBenFranklin.ImageUrl = "~/Images/MovingBen.gif";
             decimal beginBalance = Convert.ToDecimal(txtBegBal.Text);
             int monthlyInvestment = Convert.ToInt32(drpInvestment.SelectedValue);
             decimal yearlyInterestRate = Convert.ToDecimal(txtInterest.Text);
             int years = Convert.ToInt32(txtYears.Text);
+            lblText.Text = "Future Value";
             decimal futureValue = this.CalculateFutureValue(beginBalance, monthlyInvestment, yearlyInterestRate, years);
             lblValue.Text = futureValue.ToString("C");
         }
@@ -66,10 +70,17 @@ public partial class _Default : System.Web.UI.Page
 
     protected void btnClear_Click(object sender, EventArgs e)
     {
+        imgBenFranklin.ImageUrl = "~/Images/BenjaminFranklin.png";
+        txtBegBal.Text = "";
         drpInvestment.SelectedIndex = 0;
         txtInterest.Text = "";
         txtYears.Text = "";
+        lblText.Text = "";
         lblValue.Text = "";
     }
         
+    protected void ShowBenFranklin()
+    {
+        
+    }
 }
